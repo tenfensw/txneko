@@ -5,6 +5,11 @@ Cat::Cat(unsigned length) {
     printf("meowie\n");
 }
 
+Cat::~Cat() {
+    printf("bye\n");
+}
+
+
 void Cat::drawIdle(HDC graphicsContext, COLORREF clr, unsigned x, unsigned y) {
     if (!graphicsContext)
         return;
