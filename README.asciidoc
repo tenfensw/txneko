@@ -1,0 +1,13 @@
+= TXNeko
+
+A port of XNeko to TXLin.
+
+== Building (on Macs)
+
+You'll need TXLin and Xcode for this.
+
+[source,bash]
+----
+$ sh make.sh
+$ ./txneko
+----
