@@ -1,0 +1,3 @@
+[submodule "txcairo"]
+	path = txcairo
+	url = https://github.com/timkoi/txcairo

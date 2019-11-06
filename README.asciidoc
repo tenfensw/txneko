@@ -4,7 +4,7 @@ A port of XNeko to TXLin.
 
 == Building (on Macs)
 
-You'll need TXLin and Xcode for this.
+You'll need TXLin, Cairo, pkg-config and Xcode for this.
 
 [source,bash]
 ----

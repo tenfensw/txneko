@@ -1,3 +1,4 @@
 txneko
 *.o
 *.dSYM
+.DS_Store
