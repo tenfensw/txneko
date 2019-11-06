@@ -21,6 +21,7 @@
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+
 #include "TXLin.h"
 #include "TXCairo.h"
 #include <cstring>
@@ -32,6 +33,7 @@ struct txneko_args {
     unsigned width;
     unsigned height;
     unsigned speed;
+    unsigned stepping;
 };
 
 typedef struct txneko_args txneko_args_t;
@@ -51,6 +53,7 @@ txneko_args_t* parseArgs(int argc, const char** argv) {
     structure->width = 480;
     structure->height = 320;
     structure->speed = 200;
+    structure->stepping = 40;
     for (int i = 0; i < argc; i++) {
         const char* arg = argv[i];
         if (strlen(arg) >= 3 && arg[0] == '-') {
@@ -61,6 +64,8 @@ txneko_args_t* parseArgs(int argc, const char** argv) {
                 structure->height = atoi(substStr);
             else if (arg[1] == 's')
                 structure->speed = atoi(substStr);
+            else if (arg[1] == 'i')
+                structure->stepping = atoi(substStr);
         }
     }
     return structure;
@@ -108,7 +113,7 @@ int main(int argc, const char** argv) {
                     while (mouseX <= centerX) {
                         drawCat("left2", centerX, centerY);
                         txSleep(params->speed);
-                        centerX -= 40;
+                        centerX -= params->stepping;
                         if (centerX <= 0)
                             centerX = 0;
                         drawCat("left1", centerX, centerY);
@@ -120,9 +125,9 @@ int main(int argc, const char** argv) {
                     while (mouseX >= centerX) {
                         drawCat("right2", centerX, centerY);
                         txSleep(params->speed);
-                        centerX += 40;
+                        centerX += params->stepping;
                         if (centerX >= params->width)
-                            centerX -= 80;
+                            centerX -= params->stepping * 2;
                         drawCat("right1", centerX, centerY);
                         txSleep(params->speed);
                         comfortMousePos(&mouseX, &mouseY);
@@ -136,9 +141,9 @@ int main(int argc, const char** argv) {
                     while (centerY <= mouseY) {
                         drawCat("down2", centerX, centerY);
                         txSleep(params->speed);
-                        centerY += 40;
+                        centerY += params->stepping;
                         if (centerY >= params->height)
-                            centerY -= 80;
+                            centerY -= params->stepping * 2;
                         drawCat("down1", centerX, centerY);
                         txSleep(params->speed);
                         comfortMousePos(&mouseX, &mouseY);
@@ -148,7 +153,7 @@ int main(int argc, const char** argv) {
                     while (centerY >= mouseY) {
                         drawCat("up2", centerX, centerY);
                         txSleep(params->speed);
-                        centerY -= 40;
+                        centerY -= params->stepping;
                         if (centerY <= 0)
                             centerY = 0;
                         drawCat("up1", centerX, centerY);

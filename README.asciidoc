@@ -12,6 +12,9 @@ $ sh make.sh
 $ ./txneko
 ----
 
+== Usage
+``txneko [-i<step length in pixels>] [-s<delay in ms>] [-w<width>] [-h<height>]
+
 == License
 
 [source]
