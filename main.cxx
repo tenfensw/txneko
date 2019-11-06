@@ -1,3 +1,26 @@
+/*
+ TXNeko - a port of XNeko to TXLin
+ Copyright (C) 2019 Tim K <timprogrammer@rambler.ru>
+ 
+ Graphical assets: Copyright (C) 1990 Masayuki Koba
+ (Artwork license was not specified in XNeko source code, if you are
+ the owner of the artwork bundled with XNeko and TXNeko, please email
+ me and I will remove it.)
+
+ This program is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ You should have received a copy of the GNU General Public License
+ along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
 #include "TXLin.h"
 #include "TXCairo.h"
 #include <cstring>
@@ -65,8 +88,8 @@ void comfortMousePos(unsigned* x, unsigned* y) {
 int main(int argc, const char** argv) {
     txneko_args_t* params = parseArgs(argc, argv);
     txCreateWindow(params->width, params->height);
-    unsigned centerX = (params->width / 2) - 16;
-    unsigned centerY = (params->height / 2) - 16;
+    int centerX = (params->width / 2) - 16;
+    int centerY = (params->height / 2) - 16;
     drawCat("sleep1", centerX, centerY);
     unsigned mouseX = 0;
     unsigned mouseY = 0;
@@ -86,8 +109,11 @@ int main(int argc, const char** argv) {
                         drawCat("left2", centerX, centerY);
                         txSleep(params->speed);
                         centerX -= 40;
+                        if (centerX <= 0)
+                            centerX = 0;
                         drawCat("left1", centerX, centerY);
                         txSleep(params->speed);
+                        comfortMousePos(&mouseX, &mouseY);
                     }
                 }
                 else {
@@ -95,8 +121,11 @@ int main(int argc, const char** argv) {
                         drawCat("right2", centerX, centerY);
                         txSleep(params->speed);
                         centerX += 40;
+                        if (centerX >= params->width)
+                            centerX -= 80;
                         drawCat("right1", centerX, centerY);
                         txSleep(params->speed);
+                        comfortMousePos(&mouseX, &mouseY);
                     }
                 }
             }
@@ -108,8 +137,11 @@ int main(int argc, const char** argv) {
                         drawCat("down2", centerX, centerY);
                         txSleep(params->speed);
                         centerY += 40;
+                        if (centerY >= params->height)
+                            centerY -= 80;
                         drawCat("down1", centerX, centerY);
                         txSleep(params->speed);
+                        comfortMousePos(&mouseX, &mouseY);
                     }
                 }
                 else {
@@ -117,8 +149,11 @@ int main(int argc, const char** argv) {
                         drawCat("up2", centerX, centerY);
                         txSleep(params->speed);
                         centerY -= 40;
+                        if (centerY <= 0)
+                            centerY = 0;
                         drawCat("up1", centerX, centerY);
                         txSleep(params->speed);
+                        comfortMousePos(&mouseX, &mouseY);
                     }
                 }
             }
